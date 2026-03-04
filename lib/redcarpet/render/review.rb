@@ -302,6 +302,7 @@ module Redcarpet
 
       def postprocess(text)
         text = text.gsub(%r|^[ \t]+(//image\[[^\]]+\]\[[^\]]+\]{$\n^//})|, '\1')
+        text = text.gsub(/([^\n|])\n(\|)/, "\\1\n\n\\2")
         if @math
           while %r|〓MATH:(\d+):〓| =~ text
             text.sub!(%r|〓MATH:(\d+):〓|){ "@<m>{" + escape_inline(@math_buf[$1.to_i]) + "}" }
